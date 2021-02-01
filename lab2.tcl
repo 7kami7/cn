@@ -1,8 +1,14 @@
-set ns [new Simulator] set f [open ex2.tr w]
+set ns [new Simulator]
+set f [open ex2.tr w]
 $ns trace-all $f
 set nf [open ex2.nam w]
 $ns namtrace-all $nf
-set n0 [$ns node] set n1 [$ns node] set n2 [$ns node] set n3 [$ns node] set n4 [$ns node] set n5 [$ns node]
+set n0 [$ns node]
+set n1 [$ns node]
+set n2 [$ns node]
+set n3 [$ns node]
+set n4 [$ns node]
+set n5 [$ns node]
 $ns duplex-link $n0 $n1 0.01Mb 10ms DropTail
 $ns duplex-link $n1 $n2 0.01Mb 10ms DropTail
 $ns duplex-link $n2 $n3 0.01Mb 10ms DropTail
@@ -41,9 +47,11 @@ $ns at 0.2 "$p(5) send"
 }
 proc finish {} {
 global ns f nf
-$ns flush-trace #close the trace file close $f
+$ns flush-trace 
 close $nf
-puts "running nam..." exec nam ex2.nam & exit 0
+puts "running nam..." 
+exec nam ex2.nam &
+exit 0
 }
 $ns at 1.0 "finish"
 $ns run
